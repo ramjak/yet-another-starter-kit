@@ -29,6 +29,7 @@
     },
     "jsx-curly-spacing": false,
     "jsx-equals-spacing": false,
+    "jsx-no-lambda": false,
     "jsx-self-close": false,
     "jsx-space-before-trailing-slash": false,
     "max-classes-per-file": false,

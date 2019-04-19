@@ -1,26 +1,17 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 import styles from './App.module.scss';
-import logo from './logo.svg';
+import TodoContent from './modules/todo/TodoContent';
+import store from './store';
 
 class App extends Component {
   public render() {
     return (
-      <div className={styles.App}>
-        <header className={styles['App-header']}>
-          <img src={logo} className={styles['App-logo']} alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className={styles['App-link']}
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider store={store}>
+        <div className={styles.App}>
+          <TodoContent />
+        </div>
+      </Provider>
     );
   }
 }

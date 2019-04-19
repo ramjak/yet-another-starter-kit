@@ -56,6 +56,11 @@
     "no-invalid-template-strings": true,
     "no-object-literal-type-assertion": [true, { "allow-arguments": true }],
     "no-parameter-reassignment": true,
+    "no-shadowed-variable": {
+      "options": {
+        "import": false
+      }
+    },
     "no-tautology-expression": true,
     "no-unbound-method": [
       true,
@@ -72,9 +77,7 @@
     "object-literal-sort-keys": [
       true,
       "ignore-case",
-      "locale-compare",
-      "match-declaration-order",
-      "shorthand-first"
+      "locale-compare"
     ],
     "prefer-while": true,
     "static-this": true,

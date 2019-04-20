@@ -1,5 +1,5 @@
 import { Map, Record } from 'immutable';
-import createCrudSlice from '../../../../app/createCrudSlice';
+import createCrudSlice from '../../../../utils/createCrudSlice';
 import ITodo from '../models/ITodo';
 import Todo from '../models/Todo';
 

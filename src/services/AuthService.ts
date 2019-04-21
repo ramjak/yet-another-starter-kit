@@ -1,22 +1,22 @@
 import IAuthService from './IAuthService';
-import ICookieService from './ICookieService';
+import IPersistentStorage from './IPersistentStorage';
 
 export default class AuthService implements IAuthService {
   public static readonly AUTH_KEY = '_app_';
   public static readonly DAY_AFTER_EXPIRED = 7;
 
-  private cookieService: ICookieService;
+  private storage: IPersistentStorage;
 
-  constructor(cookieService: ICookieService) {
-    this.cookieService = cookieService;
+  constructor(storage: IPersistentStorage) {
+    this.storage = storage;
   }
 
   public deleteToken(): void {
-    this.cookieService.remove(AuthService.AUTH_KEY);
+    this.storage.remove(AuthService.AUTH_KEY);
   }
 
   public getToken(): string {
-    const val = this.cookieService.get(AuthService.AUTH_KEY);
+    const val = this.storage.get(AuthService.AUTH_KEY);
     if (!val) {
       throw new Error("Token doesn't exist");
     }
@@ -29,7 +29,7 @@ export default class AuthService implements IAuthService {
   }
 
   public saveToken(token: string): void {
-    this.cookieService.set(AuthService.AUTH_KEY, token, {
+    this.storage.set(AuthService.AUTH_KEY, token, {
       expires: AuthService.DAY_AFTER_EXPIRED
     });
   }

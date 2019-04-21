@@ -1,5 +1,5 @@
 import AuthService from './AuthService';
-import { ICookieOptions } from './ICookieService';
+import { IStorageOptions } from './IPersistentStorage';
 
 const key: string = AuthService.AUTH_KEY;
 const initCookieVal = { [key]: 'mockValue' };
@@ -8,7 +8,7 @@ let cookieVal = initCookieVal;
 const mockCookieService = {
   get: jest.fn((name: string): string | undefined => cookieVal[name]),
   remove: jest.fn(name => delete cookieVal[name]),
-  set: jest.fn((name: string, value: string, options?: ICookieOptions) => {
+  set: jest.fn((name: string, value: string, options?: IStorageOptions) => {
     cookieVal[key] = value;
   })
 };

@@ -3,13 +3,13 @@ import {
   remove as removeCookie,
   set as setCookie
 } from 'es-cookie';
-import ICookieService, { ICookieOptions } from './ICookieService';
+import IPersistentStorage, { IStorageOptions } from './IPersistentStorage';
 
-const cookieService: ICookieService = {
+const cookieService: IPersistentStorage = {
   get(name: string): string | undefined {
     return getCookie(name);
   },
-  set(name: string, value: string, options?: ICookieOptions): void {
+  set(name: string, value: string, options?: IStorageOptions): void {
     setCookie(name, value, options);
   },
   remove(name) {

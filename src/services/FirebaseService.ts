@@ -1,5 +1,6 @@
-import { auth, database, initializeApp, Unsubscribe } from 'firebase';
-import IFirebaseService, { AuthListener } from './IFirebaseService';
+import { auth, database, initializeApp } from 'firebase';
+import { attendanceKey } from '../modules/attendance/models/IAttendance';
+import IFirebaseService, { AttendanceListener, AuthListener } from './IFirebaseService';
 
 export default class FirebaseService implements IFirebaseService {
   public static _instance: FirebaseService;
@@ -11,6 +12,8 @@ export default class FirebaseService implements IFirebaseService {
 
     return FirebaseService._instance;
   }
+
+  private _attendanceRef: database.Reference;
   private _auth: auth.Auth;
   private _dbRoot: database.Reference;
   public _authListeners = new Map<AuthListener, Unsubscribe>();
@@ -25,7 +28,8 @@ export default class FirebaseService implements IFirebaseService {
       // messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
     });
     this._auth = auth();
-    this._dbRoot = database().ref();
+    const dbRoot = database().ref();
+    this._attendanceRef = dbRoot.child(attendanceKey);
   }
 
   public getCurrentUser() {
@@ -50,5 +54,13 @@ export default class FirebaseService implements IFirebaseService {
 
   public async signOut() {
     await this._auth.signOut();
+  }
+
+  public addAttendanceListener(callback: AttendanceListener) {
+    this._attendanceRef.on('value', callback);
+  }
+
+  public removeAttendanceListener(callback: AttendanceListener) {
+    this._attendanceRef.off('value', callback);
   }
 }

@@ -1,4 +1,5 @@
 import { database, User } from 'firebase';
+import IAttendance from '../modules/attendance/models/IAttendance';
 
 export interface IMap<T> {
   [key: string]: T;
@@ -16,4 +17,12 @@ export default interface IFirebaseService {
   signIn(email: string, password: string): Promise<void>;
   signOut(): Promise<void>;
   removeAuthListener(callback: AuthListener): void;
+  addAttendanceListener(callback: AttendanceListener): void;
+  removeAttendanceListener(callback: AttendanceListener): void;
 }
+
+export type AttendanceListener = (
+  snapshot: IFirebaseSnapshot<IAttendance> | null
+) => void;
+
+

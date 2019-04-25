@@ -1,6 +1,10 @@
 import moment, { utc } from 'moment';
 import IAttendance, { breakTimeInMs } from './models/IAttendance';
 
+export function getFormattedDate(attendance: IAttendance) {
+  return moment(attendance.firstIn).format('ddd, DD-MM-YYYY');
+}
+
 export function getTotalTime(attendance: IAttendance) {
   return attendance.lastOut - attendance.firstIn;
 }

@@ -18,6 +18,13 @@ const sampleAttendance: IAttendance = {
   lastOut: 6800000
 };
 
+it('should format attendance date', () => {
+  const mockAttendance = Object.assign({}, sampleAttendance);
+  const formattedDate = utils.getFormattedDate(mockAttendance);
+
+  expect(formattedDate).toBe('Thu, 01-01-1970');
+});
+
 it('should be calculate total time', () => {
   const mockAttendance = Object.assign({}, sampleAttendance);
   const totalTime = utils.getTotalTime(mockAttendance);

@@ -1,4 +1,4 @@
-import { auth, database, initializeApp } from 'firebase';
+import { auth, database, initializeApp, Unsubscribe } from "firebase";
 import { attendanceKey } from '../modules/attendance/models/IAttendance';
 import IFirebaseService, { AttendanceListener, AuthListener } from './IFirebaseService';
 
@@ -15,7 +15,6 @@ export default class FirebaseService implements IFirebaseService {
 
   private _attendanceRef: database.Reference;
   private _auth: auth.Auth;
-  private _dbRoot: database.Reference;
   public _authListeners = new Map<AuthListener, Unsubscribe>();
 
   private constructor() {

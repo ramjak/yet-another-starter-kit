@@ -7,19 +7,23 @@ import IPersistentStorage from './IPersistentStorage';
 import IRequestService from './IRequestService';
 import RequestService from './RequestService';
 
-export default {
-  getStorageService(): IPersistentStorage {
+class ServiceFactory {
+  // noinspection JSMethodCanBeStatic
+  public static getStorageService(): IPersistentStorage {
     return CookieService;
-  },
-  getAuthService(): IAuthService {
-    const storage = this.getStorageService();
+  }
+  public static getAuthService(): IAuthService {
+    const storage = ServiceFactory.getStorageService();
     return new AuthService(storage);
-  },
-  getRequestService(): IRequestService {
-    const authService = this.getAuthService();
+  }
+  public static getRequestService(): IRequestService {
+    const authService = ServiceFactory.getAuthService();
     return new RequestService(authService);
-  },
-  getFirebaseService(): IFirebaseService {
+  }
+  // noinspection JSMethodCanBeStatic
+  public static getFirebaseService(): IFirebaseService {
     return FirebaseService.getInstance();
   }
-};
+}
+
+export default ServiceFactory;

@@ -11,7 +11,11 @@ interface IProps {
 export class MenuItem extends Component<IProps> {
   public render() {
     return (
-      <ListItem button={true} onClick={this.props.onClick}>
+      <ListItem
+        button={true}
+        onClick={this.props.onClick}
+        style={{ cursor: 'pointer' }}
+      >
         <ListItemIcon>
           <this.props.icon />
         </ListItemIcon>

@@ -1,0 +1,85 @@
+$sidebarWidth: 240px;
+$toolbarPadding: 24px;
+
+.root {
+  display: flex;
+}
+.toolbar {
+  padding-right: $toolbarPadding;
+  margin-left: $sidebarWidth - $toolbarPadding;
+}
+.toolbarIcon {
+  //display: flex;
+  //align-items: center;
+  //justify-content: flex-end;
+  padding: 0 8px;
+  //...theme.mixins.toolbar,
+}
+.appBar {
+  z-index: 2;
+  //transition: theme.transitions.create(['width', 'margin'], {
+  //easing: theme.transitions.easing.sharp,
+  //duration: theme.transitions.duration.leavingScreen,
+  //}),
+}
+.appBarShift {
+  margin-left: $sidebarWidth;
+  width: calc(100% - #{$sidebarWidth});
+  //transition: theme.transitions.create(['width', 'margin'], {
+  //easing: theme.transitions.easing.sharp,
+  //duration: theme.transitions.duration.enteringScreen,
+  //}),
+}
+.menuButton {
+  margin-left: 12px;
+  margin-right: 36px;
+}
+.menuButtonHidden {
+  display: none;
+}
+.title {
+  flex-grow: 1;
+}
+.drawerPaper {
+  position: relative;
+  white-space: nowrap;
+  width: $sidebarWidth;
+  //transition: theme.transitions.create('width', {
+  //easing: theme.transitions.easing.sharp,
+  //duration: theme.transitions.duration.enteringScreen,
+  //}),
+}
+.drawerPaperClose {
+  overflow-x: hidden;
+  //transition: theme.transitions.create('width', {
+  //easing: theme.transitions.easing.sharp,
+  //duration: theme.transitions.duration.leavingScreen,
+  //}),
+  //width: theme.spacing.unit * 7;
+  //[theme.breakpoints.up('sm')]: {
+  //  width: theme.spacing.unit * 9,
+  //},
+}
+//appBarSpacer: theme.mixins.toolbar,
+.content {
+  padding-left: $sidebarWidth;
+  padding-top: 64px;
+  flex-grow: 1;
+  //padding: theme.spacing.unit * 3;
+  height: 100vh;
+  overflow: auto;
+}
+.contentInner {
+  padding: 16px;
+}
+.tableIcon {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.tableCell {
+  .countAvatar {
+    width: 25px;
+    height: 25px;
+    font-size: 0.8rem;
+  }
+}

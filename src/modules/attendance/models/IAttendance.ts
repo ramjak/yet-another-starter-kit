@@ -2,7 +2,7 @@ export const attendanceKey = 'Attendance';
 const anHourInMs = 3600000;
 export const breakTimeInMs = anHourInMs;
 
-interface ICheckPoint {
+export interface ICheckPoint {
   coordinateE: number;
   coordinateN: number;
   name: string;

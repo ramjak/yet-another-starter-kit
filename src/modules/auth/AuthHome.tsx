@@ -1,5 +1,16 @@
+import {
+  Button,
+  FormControl,
+  Grid,
+  Input,
+  InputLabel,
+  Paper,
+  Typography
+} from '@material-ui/core';
+import { AccountBox, Lock } from '@material-ui/icons';
 import React, { ChangeEvent, FormEvent } from 'react';
 import IFirebaseService from '../../services/IFirebaseService';
+import styles from './AuthHome.module.scss';
 
 export interface IProps {
   firebase: IFirebaseService;
@@ -46,17 +57,72 @@ class AuthHome extends React.Component<IProps, IState> {
   public render() {
     const { password, errorStatus, email } = this.state;
 
+    // noinspection HtmlDeprecatedAttribute
     return (
-      <form onSubmit={this.handleLogin}>
-        {errorStatus}
-        <input type="email" value={email} onChange={this.handleEmailChange} />
-        <input
-          type="password"
-          value={password}
-          onChange={this.handlePasswordChange}
-        />
-        <input type="submit" value="submit" />
-      </form>
+      <div className={styles.authPage}>
+        <div className={styles.authSpacer}>
+          <Paper className={styles.authBox}>
+            <Typography component="h1" variant="h5" align="center">
+              Sample App
+            </Typography>
+            <form onSubmit={this.handleLogin}>
+              {errorStatus}
+              <Grid container={true} spacing={32} alignItems="flex-end">
+                <Grid item={true} xs={1}>
+                  <AccountBox />
+                </Grid>
+                <Grid item={true} xs={true}>
+                  <FormControl margin="normal" required={true} fullWidth={true}>
+                    <InputLabel htmlFor="email">Email Address</InputLabel>
+                    <Input
+                      id="email"
+                      name="email"
+                      autoComplete="email"
+                      autoFocus={true}
+                      value={email}
+                      onChange={this.handleEmailChange}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={32} alignItems="flex-end">
+                <Grid item={true} xs={1}>
+                  <Lock />
+                </Grid>
+                <Grid item={true} xs={true}>
+                  <FormControl margin="normal" required={true} fullWidth={true}>
+                    <InputLabel htmlFor="password">Password</InputLabel>
+                    <Input
+                      name="password"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      value={password}
+                      onChange={this.handlePasswordChange}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <br />
+              <br />
+              <br />
+              <Button
+                type="submit"
+                fullWidth={true}
+                variant="contained"
+                color="primary"
+                // className={}
+              >
+                Login
+              </Button>
+              <br />
+              <div className={styles.forgotPassBox}>
+                <a href="#">Forgot Password?</a>
+              </div>
+            </form>
+          </Paper>
+        </div>
+      </div>
     );
   }
 }

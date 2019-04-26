@@ -16,6 +16,7 @@ class App extends Component<{}, {}> {
         <DependencyContextProvider value={serviceFactory}>
           <Router>
             <Switch>
+              {/*<CssBaseline />*/}
               {routes.map((route, i) => (
                 <Route key={i} {...route} />
               ))}

@@ -5,12 +5,13 @@ import styles from './MenuItem.module.scss';
 interface IProps {
   text: string;
   icon: ComponentType;
+  onClick?(): any;
 }
 
 export class MenuItem extends Component<IProps> {
   public render() {
     return (
-      <ListItem button={true}>
+      <ListItem button={true} onClick={this.props.onClick}>
         <ListItemIcon>
           <this.props.icon />
         </ListItemIcon>

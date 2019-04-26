@@ -1,40 +1,31 @@
 import {
   AppBar,
-  Avatar,
-  Button,
   CssBaseline,
   Divider,
   Drawer,
   IconButton,
   List,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
   Toolbar,
   Typography
 } from '@material-ui/core';
 import {
   AccountBox as AccountBoxIcon,
   AttachMoney as MoneyIcon,
-  Cake as CakeIcon,
   Check as CheckIcon,
-  CreditCard as CreditCardIcon,
-  EditAttributes as EditAttributeIcon,
+  ExitToApp as SignOutIcon,
   Home as HomeIcon,
   Menu as MenuIcon,
   Notes as NoteIcon,
   PermIdentity as BlankPersonIcon,
   Person as PersonIcon,
-  Settings as SettingsIcon,
-  TimerOff as TimerOffIcon
+  Settings as SettingsIcon
 } from '@material-ui/icons';
 import classNames from 'classnames';
 import React, { Component } from 'react';
 import IFirebaseService from '../../services/IFirebaseService';
 import { MenuItem } from './components/MenuItem';
 import styles from './Home.module.scss';
+import Dashboard from './pages/Dashboard';
 
 export interface IProps {
   firebase: IFirebaseService;
@@ -131,83 +122,14 @@ class Home extends Component<IProps, IState> {
             <MenuItem icon={CheckIcon} text="Attendance" />
             <MenuItem icon={NoteIcon} text="Report" />
             <MenuItem icon={SettingsIcon} text="Settings" />
+            <MenuItem
+              text="Sign Out"
+              icon={SignOutIcon}
+              onClick={this.signOut}
+            />
           </List>
         </Drawer>
-        <main className={styles.content}>
-          <div className={styles.contentInner}>
-            <Paper className={styles.root}>
-              <Table className={styles.table}>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <TimerOffIcon className={styles.tableIcon} /> Pending
-                      Leave Approval
-                    </TableCell>
-                    <TableCell
-                      align="right"
-                      padding="none"
-                      className={styles.tableCell}
-                    >
-                      <Avatar className={styles.countAvatar}>0</Avatar>
-                    </TableCell>
-                    <TableCell>
-                      <AccountBoxIcon className={styles.tableIcon} /> Documents
-                      Not Submitted
-                    </TableCell>
-                    <TableCell align="right" className={styles.tableCell}>
-                      <Avatar className={styles.countAvatar}>0</Avatar>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <CakeIcon className={styles.tableIcon} /> Upcoming
-                      Birthday
-                    </TableCell>
-                    <TableCell
-                      align="right"
-                      padding="none"
-                      className={styles.tableCell}
-                    >
-                      <Avatar className={styles.countAvatar}>0</Avatar>
-                    </TableCell>
-                    <TableCell>
-                      <BlankPersonIcon className={styles.tableIcon} /> Job
-                      Openings
-                    </TableCell>
-                    <TableCell align="right" className={styles.tableCell}>
-                      <Avatar className={styles.countAvatar}>0</Avatar>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <CreditCardIcon className={styles.tableIcon} /> Expiry
-                      Alert
-                    </TableCell>
-                    <TableCell
-                      align="right"
-                      padding="none"
-                      className={styles.tableCell}
-                    >
-                      <Avatar className={styles.countAvatar}>0</Avatar>
-                    </TableCell>
-                    <TableCell>
-                      <EditAttributeIcon className={styles.tableIcon} />{' '}
-                      Attendance Not Marked
-                    </TableCell>
-                    <TableCell align="right" className={styles.tableCell}>
-                      <Avatar className={styles.countAvatar}>0</Avatar>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </Paper>
-            <br />
-            <br />
-            <Button type="button" onClick={this.signOut} color="primary">
-              Sign Out
-            </Button>
-          </div>
-        </main>
+        <Dashboard />
       </div>
     );
   }

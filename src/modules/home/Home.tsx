@@ -151,14 +151,14 @@ class Home extends Component<IProps, IState> {
             />
           </List>
         </Drawer>
-        <main className={styles.content}>
+        <div className={styles.content}>
           {routes.map((route, i) => (
             <Route
               {...route}
               key={(route.path && route.path.toString()) || i}
             />
           ))}
-        </main>
+        </div>
       </div>
     );
   }

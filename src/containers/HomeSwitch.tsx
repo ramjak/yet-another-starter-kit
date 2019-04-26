@@ -9,15 +9,13 @@ export interface IProps {
 }
 
 interface IState {
-  user: User | null;
+  user?: User | null;
 }
 
 export class HomeSwitch extends React.Component<IProps, IState> {
   constructor(props: any) {
     super(props);
-    this.state = {
-      user: null
-    };
+    this.state = {};
 
     this.onUserChange = this.onUserChange.bind(this);
   }
@@ -35,7 +33,9 @@ export class HomeSwitch extends React.Component<IProps, IState> {
   }
 
   public render() {
-    if (this.state.user) {
+    if (typeof this.state.user === 'undefined') {
+      return <div />;
+    } else if (this.state.user) {
       return <MainHome firebase={this.props.firebase} />;
     } else {
       return <AuthHome firebase={this.props.firebase} />;

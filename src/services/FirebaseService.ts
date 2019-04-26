@@ -1,6 +1,9 @@
 import { auth, database, initializeApp, Unsubscribe } from "firebase";
 import { attendanceKey } from '../modules/attendance/models/IAttendance';
-import IFirebaseService, { AttendanceListener, AuthListener } from './IFirebaseService';
+import IFirebaseService, {
+  AttendanceListener,
+  AuthListener
+} from './IFirebaseService';
 
 export default class FirebaseService implements IFirebaseService {
   public static _instance: FirebaseService;

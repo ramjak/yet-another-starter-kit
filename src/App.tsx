@@ -9,7 +9,7 @@ import store from './store';
 
 class App extends Component<{}, {}> {
   public render() {
-    const serviceFactory = ServiceFactory;
+    const serviceFactory = new ServiceFactory();
 
     return (
       <Provider store={store}>

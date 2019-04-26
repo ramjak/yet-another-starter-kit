@@ -16,7 +16,7 @@ export const withDependency = <P extends {}>(
   BaseComponent: ComponentType,
   map: (factory: ServiceFactory) => IMap
 ) =>
-  class WithDependency extends Component<P> {
+  class WithDependency extends Component<P, {}> {
     public render() {
       const { props } = this;
 

@@ -6,7 +6,7 @@ import ServiceFactory from './services/ServiceFactory';
 // tslint:disable-next-line variable-name
 export const HomeRoute = {
   path: '/',
-  render: () => <HomeSwitch firebase={ServiceFactory.getFirebaseService()} />
+  render: () => <HomeSwitch />
 };
 
 const routes: RouteProps[] = [HomeRoute];

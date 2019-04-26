@@ -9,8 +9,10 @@ describe('<HomeSwitch />', () => {
   configure({ adapter: new Adapter() });
   const props: IProps = {
     firebase: {
+      addAttendanceListener: jest.fn(),
       addAuthListener: jest.fn(),
       getCurrentUser: jest.fn(),
+      removeAttendanceListener: jest.fn(),
       removeAuthListener: jest.fn(),
       signIn: jest.fn(),
       signOut: jest.fn()

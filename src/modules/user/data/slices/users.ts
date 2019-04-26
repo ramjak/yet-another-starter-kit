@@ -4,7 +4,8 @@ import IReq from '../../../../utils/IReq';
 import IUser from '../models/IUser';
 import userFactory from '../models/User';
 
-const req = ServiceFactory.getRequestService();
+const sf = new ServiceFactory;
+const req = sf.getRequestService();
 export const userReq: IReq<IUser> = {
   fetch: id => req.get(`/users/${id}`),
   fetchAll: () => req.get('/users')

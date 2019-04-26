@@ -22,12 +22,16 @@ import {
 } from '@material-ui/icons';
 import classNames from 'classnames';
 import React, { Component } from 'react';
+import { Route, RouteComponentProps, withRouter } from 'react-router';
 import IFirebaseService from '../../services/IFirebaseService';
+import { AttendanceRoute } from '../attendance/routes';
 import { MenuItem } from './components/MenuItem';
 import styles from './Home.module.scss';
-import Dashboard from './pages/Dashboard';
+import routes, { HomeRoute } from './routes';
 
-export interface IProps {
+interface IRouteParam {}
+
+export interface IProps extends RouteComponentProps<IRouteParam> {
   firebase: IFirebaseService;
 }
 
@@ -45,10 +49,20 @@ class Home extends Component<IProps, IState> {
     this.signOut = this.signOut.bind(this);
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
+    this.onAttendanceMenuClick = this.onAttendanceMenuClick.bind(this);
+    this.onHomeMenuClick = this.onHomeMenuClick.bind(this);
   }
 
   private async signOut() {
     await this.props.firebase.signOut();
+  }
+
+  private onAttendanceMenuClick() {
+    this.props.history.push(AttendanceRoute.path);
+  }
+
+  private onHomeMenuClick() {
+    this.props.history.push(HomeRoute.path);
   }
 
   public handleDrawerOpen() {
@@ -115,11 +129,19 @@ class Home extends Component<IProps, IState> {
           </div>
           <Divider />
           <List>
-            <MenuItem icon={HomeIcon} text="Home" />
+            <MenuItem
+              icon={HomeIcon}
+              text="Home"
+              onClick={this.onHomeMenuClick}
+            />
             <MenuItem icon={PersonIcon} text="Employee Management" />
             <MenuItem icon={BlankPersonIcon} text="Recruitment" />
             <MenuItem icon={MoneyIcon} text="Payroll" />
-            <MenuItem icon={CheckIcon} text="Attendance" />
+            <MenuItem
+              icon={CheckIcon}
+              text="Attendance"
+              onClick={this.onAttendanceMenuClick}
+            />
             <MenuItem icon={NoteIcon} text="Report" />
             <MenuItem icon={SettingsIcon} text="Settings" />
             <MenuItem
@@ -129,10 +151,12 @@ class Home extends Component<IProps, IState> {
             />
           </List>
         </Drawer>
-        <Dashboard />
+        {routes.map((route, i) => (
+          <Route {...route} key={(route.path && route.path.toString()) || i} />
+        ))}
       </div>
     );
   }
 }
 
-export default Home;
+export default withRouter(Home);

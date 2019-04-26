@@ -62,10 +62,6 @@
       }
     },
     "no-tautology-expression": true,
-    "no-unbound-method": [
-      true,
-      { "ignore-static": true, "allow-typeof": true }
-    ],
     "no-unused-expression": {
       "options": [
         "allow-fast-null-checks",

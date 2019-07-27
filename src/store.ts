@@ -10,6 +10,8 @@ const reducer = combineReducers({
   todo: todo.reducer
 });
 
+export type rootReducerStateType = ReturnType<typeof reducer>;
+
 const store = configureStore({
   enhancers: [],
   middleware: [...getDefaultMiddleware()],

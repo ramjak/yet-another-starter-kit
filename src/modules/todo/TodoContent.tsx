@@ -1,19 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import logo from '../../logo.svg';
+import { rootReducerStateType } from '../../store';
 import { ITodoStructure } from './data/models/ITodo';
-import todo, { ITodoStore } from './data/slices/todos';
+import todo from './data/slices/todos';
 import styles from './TodoContent.module.scss';
 
-interface IPropsType {
-  todos: ITodoStore;
-  createTodo(): void;
-  deleteTodo(todo: ITodoStructure): void;
-  toggleTodo(oldVal: ITodoStructure, newVal: ITodoStructure): void;
-}
+const mapStateToProps = (state: rootReducerStateType) => ({
+  todos: state.todo
+});
 
-class TodoContent extends Component<IPropsType> {
-  constructor(props: Readonly<IPropsType>) {
+const mapDispatchToProps = {
+  createTodo: () =>
+    todo.actions.create({ isDone: false, task: Math.random().toString() }),
+  deleteTodo: todo.actions.delete,
+  toggleTodo: (oldVal: ITodoStructure, newVal: ITodoStructure) =>
+    todo.actions.update({ oldTodo: oldVal, newTodo: newVal })
+};
+
+type dispatchPropsType = typeof mapDispatchToProps;
+
+// using typeof means that this component is tightly coupled with its action counterpart
+// also using this means, we're violating DIP:
+// "Depend upon abstractions. Do not depend upon concrete classes."
+// todo: using action interface is better
+interface IProps
+  extends ReturnType<typeof mapStateToProps>,
+    dispatchPropsType {}
+
+class TodoContent extends Component<IProps> {
+  constructor(props: Readonly<IProps>) {
     super(props);
   }
 
@@ -49,18 +65,6 @@ class TodoContent extends Component<IPropsType> {
     );
   }
 }
-
-const mapStateToProps = (state: any) => ({
-  todos: state.todo
-});
-
-const mapDispatchToProps = {
-  createTodo: () =>
-    todo.actions.create({ isDone: false, task: Math.random().toString() }),
-  deleteTodo: todo.actions.delete,
-  toggleTodo: (oldVal: ITodoStructure, newVal: ITodoStructure) =>
-    todo.actions.update({ oldTodo: oldVal, newTodo: newVal })
-};
 
 export default connect(
   mapStateToProps,

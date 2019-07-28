@@ -8,6 +8,7 @@ const prefix = 'sampleApp/';
 
 // todo: action need to be async
 export default function createCrudSlice<I>(
+  name: string,
   entityFactory: (instance: I) => Record<I>,
   serverReq?: IReq<I>
 ) {
@@ -15,13 +16,26 @@ export default function createCrudSlice<I>(
   type IStore = Map<string, entityType>;
   const store: IStore = Map({});
 
+  const init = (state: any, action: PayloadAction<I[]>) => {
+    let cleanState = state.deleteAll();
+
+    action.payload.forEach(item => {
+      // todo: id can be retrieved in api call
+      const id = idGenerator.generate();
+      const immutableInstance = entityFactory(item);
+      cleanState = cleanState.set(id, immutableInstance);
+    });
+
+    return cleanState;
+  };
+
   const create = (state: any, action: PayloadAction<I>) => {
-    const immutableTodo = entityFactory(action.payload);
+    const immutableInstance = entityFactory(action.payload);
     // todo: id can be retrieved in api call
     const id = idGenerator.generate();
     serverReq && serverReq.create && serverReq.create(action.payload);
 
-    return state.set(id, immutableTodo);
+    return state.set(id, immutableInstance);
   };
 
   const update = (
@@ -80,8 +94,9 @@ export default function createCrudSlice<I>(
     reducers: {
       create,
       delete: deleteItem,
+      init,
       update
     },
-    slice: prefix + 'todo'
+    slice: prefix + name
   });
 }

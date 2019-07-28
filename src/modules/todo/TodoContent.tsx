@@ -15,7 +15,7 @@ const mapDispatchToProps = {
     todo.actions.create({ isDone: false, task: Math.random().toString() }),
   deleteTodo: todo.actions.delete,
   toggleTodo: (oldVal: ITodoStructure, newVal: ITodoStructure) =>
-    todo.actions.update({ oldTodo: oldVal, newTodo: newVal })
+    todo.actions.update({ oldObj: oldVal, newObj: newVal })
 };
 
 type dispatchPropsType = typeof mapDispatchToProps;

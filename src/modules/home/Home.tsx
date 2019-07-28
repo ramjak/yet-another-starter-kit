@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import IFirebaseService from '../../services/IFirebaseService';
 import TodoContent from '../todo/TodoContent';
+import UserContent from '../user/UserContent';
 
 export interface IProps {
   firebase: IFirebaseService;
@@ -23,7 +24,8 @@ class Home extends Component<IProps, IState> {
     return (
       <React.Fragment>
         <button onClick={this.signOut}>Sign Out</button>
-        <TodoContent />
+        {/*<TodoContent />*/}
+        <UserContent />
       </React.Fragment>
     );
   }

@@ -1,0 +1,21 @@
+.authPage {
+  height: 100vh;
+  background: transparent url('./assets/authBg.jpg') no-repeat scroll center
+    bottom/cover;
+}
+
+.authSpacer {
+  padding: 100px 0;
+}
+
+.authBox {
+  width: 300px;
+  padding: 30px;
+  margin: auto auto;
+}
+
+.forgotPassBox {
+  width: 100%;
+  text-align: center;
+  margin: 15px 0;
+}
